@@ -1,4 +1,4 @@
-# Типограф — плагин в Sketch
+# Типограф — js-библиотека для интернета и плагин для Sketch
 Ставит неразрывные пробелы после предлогов и союзов, между числом и единицей измерения.
 Делает «правильные кавычки снаружи и „внутри“ предложения» вместо программистских «"», “also in ‘english’ language”.
 Убирает лишние пробелы, табы, энтеры, точки, запятые и прочий хлам, но многоточие оставляет.
@@ -8,7 +8,7 @@
 Отбивает пробелом 100 % или 50 €, а в английском написании пробел убирает — $200.
 Ещё много мелочей.
 
-# Sketch Typograph plugin
+# Typograph — Sketch plugin and js-library 
 Puts non-breaking spaces after one-letter words, after russian unions, between the number and unit.
 Puts right quotes “outside and ‘inside’ proposals” instead programmers “ " ”.
 Removes double-spaces, double-enters, double-dots and other trash, but leaves ellipsis.
