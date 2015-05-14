@@ -1,4 +1,6 @@
-# Типограф — js-библиотека для интернета и плагин для Sketch
+![Typograph](http://dezonik.com/typograph/img/promo.png)
+
+# Типограф — js-библиотека и плагин для Sketch
 Ставит неразрывные пробелы после предлогов и союзов, между числом и единицей измерения.
 
 Делает «правильные кавычки снаружи и „внутри“ предложения» вместо программистских «"», “also in ‘english’ language”.
@@ -14,8 +16,6 @@
 Отбивает пробелом 100 % или 50 €, а в английском написании пробел убирает — $200.
 
 Ещё много мелочей.
-
-![Typograph](http://dezonik.com/typograph/img/promo.png)
 
 # Typograph — Sketch plugin and js-library 
 Puts non-breaking spaces after one-letter words, after russian unions, between the number and unit.
