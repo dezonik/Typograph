@@ -13,14 +13,8 @@ var typographme = function (text) {
     text = text.replace(/(\S)( |\xA0)?\-\s?(\d|\(|\))/g, "$1\xA0−\xA0$3");
 
     
-    // !!!!!!!!!!!!!!!!!!!
-    text = text.replace(/(\!{2,})/g, "!");
-
-    // ???????????????????
-    text = text.replace(/(\?{2,})/g, "?");
-
-    // Убирает все неразрывные пробелы
-    text = text.replace(/\xA0/g, " ");        
+    // !!!!!!!!!!!!!!!!!!!???????????????
+    text = text.replace(/(\!|\?){2,}/g, "$1");     
 
     // Квадраты и кубы            
     text = text.replace(/\s?(мкм|мм|см|дм|м|км|µm|mm|cm|m|km)\^?2/gi, "\xA0$1²");
