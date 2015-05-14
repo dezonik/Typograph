@@ -35,4 +35,4 @@ And a little more.
 # Install
 Doubleclick the plugin to install it.
 
-Or Plugins — Reveal Plugins Folder and put typograph.sketchplugin here.
+Or `Plugins — Reveal Plugins Folder` and put `typograph.sketchplugin` here.
