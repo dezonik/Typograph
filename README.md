@@ -1,4 +1,4 @@
-![Typograph](http://dezonik.com/typograph/img/typo.png)
+![Typograph](http://dezonik.com/typograph/img/promo.gif)
 
 # Типограф — js-библиотека и плагин для Sketch
 Ставит неразрывные пробелы после предлогов и союзов, между числом и единицей измерения.
