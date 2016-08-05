@@ -4,7 +4,7 @@ var onRun = function (context) {
 	var doc = context.document;
 	var selection = context.selection;
 	
-	for (var il=0; il<selection.length(); il++) {
+	for (var il=0; il<selection.count(); il++) {
 		
 		if (selection[il].className() == "MSTextLayer") {
 
