@@ -77,25 +77,38 @@ var onRun = function (context) {
                text = text.replace(/( *)»(\S(?=[А-я]))/gi,"$1«$2");
                text = text.replace(/( *)»(\S(?=[A-z]))/gi,"$1«$2");
                text = text.replace(/( *)»(\S(?=[0-9]))/gi,"$1«$2");
+               // Исправляем две кавычки вначале
+               text = text.replace(/«»/g,"««");
                // Внутри
                ins = 0;
                while (ins<30) {
                      text = text.replace(/«([^«»]*)«([^«»]*)»/g,"«$1„$2“");
                      ins++;
                }
+
+               
                
                // На английском внутри
                text = text.replace(/„([A-z])/g,"‘$1");
                text = text.replace(/([A-z](.*))“/g,"$1’");
                // На английском снаружи
+               //text = text.replace(/«([A-z]*)/g,"“$1");
+               //text = text.replace(/([A-z]*)»/g,"$1”");
                text = text.replace(/«([A-z])/g,"“$1");
+               text = text.replace(/([A-z])( |\xA0)«‘/g,"$1$2“‘");
+               text = text.replace(/«‘([A-z])/g,"“‘$1");
+
                text = text.replace(/([A-z])»/g,"$1”");
+               text = text.replace(/([A-z])’»/g,"$1’”");
+               text = text.replace(/’»( |\xA0)([A-z])/g,"’”$1$2");
+
+               
                // Восстанавливает англйиские сокращения, like don't
                text = text.replace(/([A-z])”([A-z])/g,"$1’$2");
                // Восстанавливает «500 cats”
                text = text.replace(/«(\d+( |\xA0)[A-z])/g,"“$1");
                text = text.replace(/([A-z]( |\xA0)\d+)»/g,"$1”");
-
+               
                // .»  →  ».
                text = text.replace(/\.»/g,"»\.");
 
@@ -149,14 +162,20 @@ var onRun = function (context) {
                // Убирает пробелы $100, €100
                text = text.replace(/(\$|€) ?(\d+)/g, "$1$2");
 
-               // Цифры на разряды 10 000
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4\xA0$5\xA0$6\xA0$7\xA0$8\xA0$9");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4\xA0$5\xA0$6\xA0$7\xA0$8");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4\xA0$5\xA0$6\xA0$7");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4\xA0$5\xA0$6");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4\xA0$5");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{2,3}) ?(\d{3})/g, "$1$2\xA0$3");
+               // Цифры на разряды 10 000
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5 $6 $7 $8 $9");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5 $6 $7 $8");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5 $6 $7");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5 $6");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{2,3}) ?(\d{3})/g, "$1$2 $3");
+
+               // Неразрывный пробел в конце параграфа
+               text = text.replace(/( |\xA0)(\w+)(\.|!|\?)( |\xA0)?\n/g, "\xA0$2$3\n");
+               // И в конце текстового блока
+               text = text.replace(/( |\xA0)(\w+)(\.|!|\?)$/g, "\xA0$2$3");
+               
 
                // Неразрывные пробелы (Спасибо типографу Кирилла Панфилова http://erlang.kirillpanfilov.com/devanagari)
                preps = new Array("без", "безо", "в", "во", "вне", "для", "до", "за", "из", "изо", "из-за", "из-под", "к", "ко", "на", "над", "надо", "о", "об", "обо", "около", "от", "ото", "по", "по-над", "под", "подо", "при", "про", "с", "со", "сквозь", "у", "через", "а", "но", "и", "да", "или", "иль", "либо", "не", "ни", "a", "the", "at", "to", "or")
@@ -183,7 +202,6 @@ var onRun = function (context) {
 
                tmp = new RegExp("( |\xA0)( |\xA0)", "g");
                text = text.replace(tmp,"\xA0");
-                  
 
 			// insert beautiful text
 			layer.setStringValue(text);
