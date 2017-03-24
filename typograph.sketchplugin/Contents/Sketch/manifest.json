@@ -13,7 +13,7 @@
             {
                 "name": "Typograph",
                 "identifier": "typograph-text",
-                "shortcut": "shift t",
+                "shortcut": "ctrl t",
                 "script": "typograph.js",
                 "handler": "onRun"
             }
