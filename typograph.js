@@ -148,6 +148,7 @@ var typographme = function (text) {
     // Убирает пробелы $100, €100
     text = text.replace(/(\$|€) ?(\d+)/g, "$1$2");
 
+
     // Цифры на разряды 10 000
     text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5 $6 $7 $8 $9");
     text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5 $6 $7 $8");
@@ -189,6 +190,10 @@ var typographme = function (text) {
     tmp = new RegExp("( |\xA0)( |\xA0)", "g");
     text = text.replace(tmp,"\xA0");
 
+
+    // Убирает пробел после точки перед закрывающей скобкой
+    text = text.replace(/\.\s\u0029/g, "\.\u0029");
+    
 
     return text;
 
