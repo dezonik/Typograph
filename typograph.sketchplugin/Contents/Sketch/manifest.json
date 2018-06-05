@@ -1,6 +1,6 @@
 {
     "name": "Typograph",
-    "description": "It makes good text from “horrible”. Puts quotes “outside and ‘inside’ proposals”. Puts a non-breaking spaces after one-letter words, after russian unions and in 100 % or 50 ₽. Removes spaces and divides the number on the level in $100 and €15 800. Translate m2 to m² and so on. Now coder not ashamed to paste the text from the artboard ©. It's like a 2 * 2 = 4 ± 0. — Really, wonderful plugin!",
+    "description": "It makes good text from “horrible”. Puts quotes “outside and ‘inside’ proposals”. Puts a non-breaking spaces after one-letter words, after russian unions and in 100 % or 50 ₽. Removes spaces and divides the number on the level in $100 and €15 800. Translate m2 to m² and so on. Now coder not ashamed to paste the text from the artboard ©. It's like a 2 * 2 = 4 ± 0.\u2028— Really, wonderful plugin!",
     "author": "@dezonik",
     "homepage": "http://dezonik.com/typograph/en",
     "version": 1,
