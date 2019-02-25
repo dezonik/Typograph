@@ -14,6 +14,7 @@ var onRun = function (context) {
 			// get the text
 			var text = layer.stringValue();
 
+
                // Символы
                text = text.replace(/\s?(\(c\))|\s?(\(с\))/gi, "\xA0©");
                text = text.replace(/\s?\(r\)/gi, "\xA0®");
@@ -35,6 +36,7 @@ var onRun = function (context) {
                // Квадраты и кубы            
                text = text.replace(/\s?(мкм|мм|см|дм|м|км|µm|mm|cm|m|km)\^?2/gi, "\xA0$1²");
                text = text.replace(/\s?(мкм|мм|см|дм|м|км|µm|mm|cm|m|km)\^?3/gi, "\xA0$1³");
+               text = text.replace(/(\\|\/)\xA0(мкм|мм|см|дм|м|км|µm|mm|cm|m|km)(²|³)/gi, "\/$2$3");
 
 
                // Тире
@@ -156,20 +158,20 @@ var onRun = function (context) {
                text = text.replace(/(\n|\u2028|\u2029)[ |\xA0]?/g, "$1");
 
 
+               // Цифры на разряды 10 000
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029|$|€|₽)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4\xA0$5\xA0$6\xA0$7\xA0$8\xA0$9");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029|$|€|₽)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4\xA0$5\xA0$6\xA0$7\xA0$8");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029|$|€|₽)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4\xA0$5\xA0$6\xA0$7");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029|$|€|₽)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4\xA0$5\xA0$6");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029|$|€|₽)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4\xA0$5");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029|$|€|₽)(\d{1,3}) ?(\d{3}) ?(\d{3})/g, "$1$2\xA0$3\xA0$4");
+               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029|$|€|₽)(\d{2,3}) ?(\d{3})/g, "$1$2\xA0$3");
 
                // Ставит пробелы 100 %, 100 $, 100 €, 100 ₽
                text = text.replace(/(\d+) ?(%|\$|€|₽|°)/g, "$1\xA0$2");
                // Убирает пробелы $100, €100
                text = text.replace(/(\$|€) ?(\d+)/g, "$1$2");
 
-               // Цифры на разряды 10 000
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5 $6 $7 $8 $9");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5 $6 $7 $8");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5 $6 $7");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5 $6");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4 $5");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{1,3}) ?(\d{3}) ?(\d{3})/g, "$1$2 $3 $4");
-               text = text.replace(/( |\xA0|^|\n|\u2028|\u2029)(\d{2,3}) ?(\d{3})/g, "$1$2 $3");
 
                // Неразрывный пробел в конце параграфа
                text = text.replace(/( |\xA0)(\w+)(\.|!|\?)( |\xA0)?\n/g, "\xA0$2$3\n");
@@ -202,6 +204,11 @@ var onRun = function (context) {
 
                tmp = new RegExp("( |\xA0)( |\xA0)", "g");
                text = text.replace(tmp,"\xA0");
+
+               
+               // Убирает пробел после точки перед закрывающей скобкой
+               text = text.replace(/\.\s\u0029/g, "\.\u0029");
+
 
 			// insert beautiful text
 			layer.setStringValue(text);
