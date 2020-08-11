@@ -1,5 +1,3 @@
-![Typograph](http://dezonik.com/typograph/img/promo2.gif)
-
 # [Try it!](http://dezonik.com/typograph/en)
 
 # Typograph — Sketch plugin and js-library 
